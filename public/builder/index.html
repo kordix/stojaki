@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Builder</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <style>
+        textarea {
+            width: 300px;
+            height: 150px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div id="app" class="container">
+            <label for="">Nazwa modelu:</label>
+            <input type="text" v-model="modelnazwa">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group" v-for="(elem,index) in dane">
+                        <label for="">Dana{{index+1}} nazwa</label>
+                        <input type="text" v-model="dane[index].nazwa">
+                        <label for="">Dana{{index+1}} typ</label>
+                        <select v-model="dane[index].typ">
+                            <option value="increments">id</option>
+                            <option value="integer">int</option>
+                            <option value="string">string</option>
+                            <option value="date">data</option>
+                            <option value="integer">kategoria</option>
+                        </select>
+                        <button @click="remove(index)">usuń</button>
+                    </div>
+                </div>
+                <div class="col-2"><button @click="add">dodaj</button> </div>
+            </div>
+            <button @click="generate">generuj</button>
+
+
+            <p><b>Migracja:</b></p>
+            <textarea style="height:30px">{{modelcommand}}</textarea>
+            <textarea style="display:block;width:600px">{{migracja}}</textarea>
+            <textarea style="height:30px">php artisan migrate</textarea>
+            <textarea style="height:30px">protected $guarded=[];</textarea>
+            <p><b> web.php:</b></p>
+            <textarea name="" id="" style="height:40px;width:600px">{{route}}</textarea>
+            <p><b>{{modelnazwa}}Controller.php</b></p>
+            <p>index</p>
+            <textarea style="display:block;width:600px;height:40px;">{{index}}</textarea>
+            <p>store</p>
+            <textarea style="display:block;width:600px;height:40px;">{{store}}</textarea>
+            <p>update</p>
+            <textarea style="display:block;width:600px;height:40px;">{{update}}</textarea>
+            <p><b>Edit.vue</b></p>
+            <textarea name="" id="" cols="30" rows="10" style="width:800px">
+                {{myhtml}}
+        </textarea>
+
+            <p><i>Skopiuj dane z devtools np. do app.js pod własną nazwą zmiennej, zapodaj nazwę modelu do komponentów
+                    Read i Edit</i></p>
+            <p><b> Typowa konfiguracja dla kategorii:</b></p>
+            <p>w app.js</p>
+            <textarea
+                style="display:block;width:1000px;height:40px;">axios.get('/category').then((res)=>self.clientschema.find((el)=>el.nazwa == 'category_id' ).dane = res.data);</textarea>
+            <p>index w {{modelnazwa}}Controller.php </p>
+            <textarea style="width: 1200px;height:60px">return $users = DB::table('clients')->join('categories', 'clients.category_id', '=', 'categories.id')->select('clients.*', 'categories.name as categoriesname')->get();
+        </textarea>
+
+
+            <button @click="save">zapisz</button>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                modelcommand: '',
+                modelnazwa: '',
+                migracja: '',
+                route: '',
+                index: '',
+                store: '',
+                delete: '',
+                show: '',
+                update: '',
+                myhtml:'',
+                dane: []
+            },
+            created() {
+                if (localStorage.dane) {
+                    this.dane = JSON.parse(localStorage.dane);
+                    this.modelnazwa = localStorage.modelnazwa;
+                }
+            },
+            methods: {
+                add() {
+                    this.dane.push({ nazwa: '', typ: '' })
+                },
+                remove(index) {
+                    console.log(index);
+
+                    this.dane = this.dane.slice(index);
+
+                },
+                generateMigracja() {
+                    this.migracja = ''; 
+                    this.modelcommand = 'php artisan make:model ' + this.modelnazwa + ' -mr';
+
+                    for (let i = 0; i < this.dane.length; i++) {
+                        this.migracja += '$table->' + this.dane[i].typ + '(\'' + this.dane[i].nazwa + '\')->nullable();';
+                    }
+
+                },
+                generateRoute() {
+                    this.route = `Route::resource('${this.modelnazwa.toLowerCase()}','${this.modelnazwa}Controller');`;
+
+                },
+                generateController() {
+                    this.index = `return ${this.modelnazwa}::all();`;
+                    this.store = `${this.modelnazwa}::create($request -> all());`
+                    this.update = `${this.modelnazwa}::update($request -> all());`
+                    this.delete = `${this.modelnazwa}::delete();`
+                },
+                generateHTML() {
+                    let output = ''
+                    for(elem of this.dane){
+                        output += '<label>'+ elem.nazwa  +'</label>';
+                        output += '<input v-model="cruddata.'+ elem.nazwa+'">'
+                    }
+
+                    this.myhtml = output;
+             
+
+                },
+                generate() {
+                    this.generateMigracja();
+                    this.generateRoute();
+                    this.generateController();
+                    this.generateHTML();
+
+                },
+
+
+                save() {
+                    localStorage.dane = JSON.stringify(this.dane);
+                    localStorage.modelnazwa = this.modelnazwa;
+
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
