@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOknasTable extends Migration
+class CreateWindowsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateOknasTable extends Migration
      */
     public function up()
     {
-        Schema::create('oknas', function (Blueprint $table) {
+        Schema::create('windows', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('barcode')->nullable();
             $table->string('order')->nullable();
@@ -31,6 +31,6 @@ class CreateOknasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('oknas');
+        Schema::dropIfExists('windows');
     }
 }

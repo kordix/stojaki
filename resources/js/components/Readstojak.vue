@@ -17,7 +17,7 @@
             <tbody>
                 <tr v-for="elem in dane">
                     <td>{{elem.barcode}}</td>
-                    <td>{{elem.lokalizacja}}</td>
+                    <td>{{elem.site}}</td>
 
                      <!-- <td><button @click="mydestroy(elem.id)" class="btn btn-sm btn-danger">Usuń</button></td>
                     <td><button @click="edit(elem.id)" class="btn btn-sm btn-danger">Edytuj</button></td> -->
@@ -44,7 +44,7 @@
                <label>Barkod stojaka:</label>
                <input v-model="cruddata.barcode">
                <label>Lokalizacja:</label>
-               <input v-model="cruddata.lokalizacja">
+               <input v-model="cruddata.site">
                 <!-- koniec html -->
                 <button type="button" @click="add" v-if="mode=='create'">Zapisz</button> 
 

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Okna;
+use App\Window;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class OknaController extends Controller
+class WindowController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,7 @@ class OknaController extends Controller
      */
     public function index()
     {
-        //return Okna::all();
-
-        return DB::table('oknas')->leftJoin('stojaks', 'oknas.stand', '=', 'stojaks.barcode')->select('oknas.*', 'stojaks.site')->get();
+        return DB::table('windows')->leftJoin('stojaks', 'windows.stand', '=', 'stojaks.barcode')->select('windows.*', 'stojaks.site')->get();
     }
 
     /**
@@ -38,16 +36,16 @@ class OknaController extends Controller
      */
     public function store(Request $request)
     {
-        Okna::create($request -> all());
+        Window::create($request -> all());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Okna  $okna
+     * @param  \App\Window  $window
      * @return \Illuminate\Http\Response
      */
-    public function show(Okna $okna)
+    public function show(Window $window)
     {
         //
     }
@@ -55,10 +53,10 @@ class OknaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Okna  $okna
+     * @param  \App\Window  $window
      * @return \Illuminate\Http\Response
      */
-    public function edit(Okna $okna)
+    public function edit(Window $window)
     {
         //
     }
@@ -67,22 +65,22 @@ class OknaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Okna  $okna
+     * @param  \App\Window  $window
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Okna $okna)
+    public function update(Request $request, Window $window)
     {
-        Okna::update($request -> all());
+        Window::update($request -> all());
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Okna  $okna
+     * @param  \App\Window  $window
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Okna $okna)
+    public function destroy(Window $window)
     {
-        $okna->delete();
+        $window->delete();
     }
 }

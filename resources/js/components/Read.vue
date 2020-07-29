@@ -4,7 +4,7 @@
         <p>
             <b>{{modelname}}</b>
         </p>
-        <input type="text" v-model="filterKey">
+        <input v-model="filterKey" placeholder="szukaj" class="margin-bottom:20px">
         <table class="table table-bordered table-dark" style="width:500px">
             <thead>
                 <tr>
@@ -19,8 +19,8 @@
             <tbody>
                 <tr v-for="elem in filteredDane">
                     <td>{{elem.barcode}}</td>
-                    <td>{{elem.stojak_id}}</td>
-                  <td>{{elem.lokalizacja}}</td>
+                    <td>{{elem.stand}}</td>
+                  <td>{{elem.site}}</td>
 
                      <!-- <td><button @click="mydestroy(elem.id)" class="btn btn-sm btn-danger">Usuń</button></td>
                     <td><button @click="edit(elem.id)" class="btn btn-sm btn-danger">Edytuj</button></td> -->
@@ -45,12 +45,12 @@
 
                 <!-- TU WSTAW HTML -->
                 <div v-if="!stojakready">
-                   <label>Otwórz stojak:</label><input v-model="cruddata.stojak_id">
+                   <label>Otwórz stojak:</label><input v-model="cruddata.stand">
                    <button @click="stojakready = true">Gotowe</button>
                  </div>
 
                  <div v-if="stojakready">
-                <p><b>Aktywny stojak: {{cruddata.stojak_id}}</b></p>
+                <p><b>Aktywny stojak: {{cruddata.stand}}</b></p>
 
                 </div>
 

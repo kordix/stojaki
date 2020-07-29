@@ -16,7 +16,13 @@ class CreateStojaksTable extends Migration
         Schema::create('stojaks', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('barcode')->nullable();
-            $table->string('lokalizacja')->nullable();
+            $table->string('site')->nullable();
+            $table->string('data_start')->nullable();
+            $table->string('data_end')->nullable();
+            $table->string('remarks')->nullable();
+
+
+
             $table->timestamps();
         });
     }

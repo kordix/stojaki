@@ -10,7 +10,7 @@
 
 </select>
  <div v-if="activetab=='main'">
-    <read :key="'1'" :modelname="'Okna'"></read>
+    <read :key="'1'" :modelname="'Window'"></read>
  </div>
 
 
