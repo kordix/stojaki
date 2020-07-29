@@ -1,3 +1,11 @@
+.theme--dark.v-data-table.v-data-table--fixed-header thead th{
+    background: #005555!important;
+}
+.theme--dark.v-data-table {
+    background-color: transparent!important;
+}
+
+
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
@@ -11,3 +19,9 @@
 @import '~vuetify/dist/vuetify.min.css';
 //Icons
 @import '~@mdi/font/css/materialdesignicons.min.css';
+.main-bg{
+    background-color: rgba(52, 94, 107, 0.8);
+    }
+    .gradient {
+        background-image: radial-gradient(#6496aa, #2c434b);
+      }

@@ -3,8 +3,8 @@
 @section('content')
 
 
-<v-app>
-   <v-main  dark hieght="">
+<v-app dark>
+   <v-main  dark class="main-bg">
       <router-view></router-view>
    </v-main>
 </v-app>
