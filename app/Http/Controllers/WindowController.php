@@ -15,7 +15,7 @@ class WindowController extends Controller
      */
     public function index()
     {
-        return DB::table('windows')->leftJoin('stojaks', 'windows.stand', '=', 'stojaks.barcode')->select('windows.*', 'stojaks.site')->get();
+        return DB::table('windows')->leftJoin('stands', 'windows.stand', '=', 'stands.barcode')->select('windows.*', 'stands.site')->get();
     }
 
     /**

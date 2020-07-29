@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Okna extends Model
+class Stand extends Model
 {
     protected $guarded=[];
 }

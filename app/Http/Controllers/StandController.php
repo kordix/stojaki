@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Okna;
+use App\Stand;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class OknaController extends Controller
+class StandController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +14,7 @@ class OknaController extends Controller
      */
     public function index()
     {
-        //return Okna::all();
-
-        return DB::table('oknas')->leftJoin('stojaks', 'oknas.stand', '=', 'stojaks.barcode')->select('oknas.*', 'stojaks.site')->get();
+        return Stojak::all();
     }
 
     /**
@@ -38,16 +35,16 @@ class OknaController extends Controller
      */
     public function store(Request $request)
     {
-        Okna::create($request -> all());
+        Stand::create($request -> all());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Okna  $okna
+     * @param  \App\Stand  $stand
      * @return \Illuminate\Http\Response
      */
-    public function show(Okna $okna)
+    public function show(Stand $stand)
     {
         //
     }
@@ -55,10 +52,10 @@ class OknaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Okna  $okna
+     * @param  \App\Stand  $stand
      * @return \Illuminate\Http\Response
      */
-    public function edit(Okna $okna)
+    public function edit(Stand $stand)
     {
         //
     }
@@ -67,22 +64,22 @@ class OknaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Okna  $okna
+     * @param  \App\Stand  $stand
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Okna $okna)
+    public function update(Request $request, Stand $stand)
     {
-        Okna::update($request -> all());
+        Stand::update($request -> all());
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Okna  $okna
+     * @param  \App\Stand  $stand
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Okna $okna)
+    public function destroy(Stand $stand)
     {
-        $okna->delete();
+        //
     }
 }
