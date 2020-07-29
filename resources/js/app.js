@@ -32,8 +32,11 @@ Vue.component('readstojak', require('./components/Readstojak.vue').default);
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
+import vuetify from './vuetify'
+import router from './router'
 const app = new Vue({
+    router,
+    vuetify,
     el: '#app',
     data: {
         activetab: 'main',

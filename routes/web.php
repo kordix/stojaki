@@ -10,10 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return view('main');
 });
+
+Route::get('/{any}', function () {
+    return view('main');})->where('any', '.*');
 
 Auth::routes();
 
@@ -21,6 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('stojak','StojakController');
 Route::resource('window','WindowController');
+
 
 
 

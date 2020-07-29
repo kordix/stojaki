@@ -3,7 +3,13 @@
 @section('content')
 
 
-<div class="container">
+<v-app>
+   <v-main  dark hieght="">
+      <router-view></router-view>
+   </v-main>
+</v-app>
+
+<!-- <div class="container">
 <select name="" id="" v-model="activetab">
     <option value="main">Okna</option>
     <option value="stojaki">Stojaki</option>
@@ -19,7 +25,7 @@
  </div>
 
     
-</div>
+</div> -->
 
 
 
