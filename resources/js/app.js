@@ -21,6 +21,8 @@ window.Vue = require('vue');
 
 
 Vue.component('read', require('./components/Read.vue').default);
+Vue.component('readstojak', require('./components/Readstojak.vue').default);
+
 // Vue.component('edit', require('./components/Edit.vue').default);
 
 

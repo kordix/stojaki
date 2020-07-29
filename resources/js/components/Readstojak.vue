@@ -4,11 +4,9 @@
         <p>
             <b>{{modelname}}</b>
         </p>
-        <input type="text" v-model="filterKey">
         <table class="table table-bordered table-dark" style="width:500px">
             <thead>
                 <tr>
-                    <td>Barkod okna</td>
                     <td>Barkod stojaka</td>
                     <td>Lokalizacja</td>
 
@@ -17,14 +15,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="elem in filteredDane">
+                <tr v-for="elem in dane">
                     <td>{{elem.barcode}}</td>
-                    <td>{{elem.stojak_id}}</td>
-                  <td>{{elem.lokalizacja}}</td>
+                    <td>{{elem.lokalizacja}}</td>
 
                      <!-- <td><button @click="mydestroy(elem.id)" class="btn btn-sm btn-danger">Usuń</button></td>
                     <td><button @click="edit(elem.id)" class="btn btn-sm btn-danger">Edytuj</button></td> -->
-  <!-- stojaki.find(el=>el.barcode == elem.stojak_id).lokalizacja} -->
+
                 </tr>
             </tbody>
         </table>
@@ -44,25 +41,14 @@
                 <!-- <input type="hidden" class="form-control" :value="cruddata.id" name="id"> -->
 
                 <!-- TU WSTAW HTML -->
-                <div v-if="!stojakready">
-                   <label>Otwórz stojak:</label><input v-model="cruddata.stojak_id">
-                   <button @click="stojakready = true">Gotowe</button>
-                 </div>
-
-                 <div v-if="stojakready">
-                <p><b>Aktywny stojak: {{cruddata.stojak_id}}</b></p>
-
-                </div>
-
-                <div v-if="stojakready"> 
-                <label>Barkod okna</label><input v-model="cruddata.barcode">
-                <button type="button" @click="add" v-if="mode=='create'">zapisz</button>
-                </div>
-               
-
+               <label>Barkod stojaka:</label>
+               <input v-model="cruddata.barcode">
+               <label>Lokalizacja:</label>
+               <input v-model="cruddata.lokalizacja">
                 <!-- koniec html -->
-               
-                <!-- <button type="button" @click="update" v-if="mode=='edit'">Zmień</button> --> 
+                <button type="button" @click="add" v-if="mode=='create'">Zapisz</button> 
+
+                <button type="button" @click="update" v-if="mode=='edit'">Zmień</button> 
 
             </div>
         </div>
@@ -72,10 +58,10 @@
 <p></p>
 <p></p>
     <ul id="todo">
-         <li>przypisanie lokalizacji do stojaka</li>
+      <li>Ładowanie - </li>
       <li>Szukaj</li>
       <li>Stojaki z sumami, szczegóły stojaka</li>
-     
+      <li>przypisanie lokalizacji do stojaka</li>
     </ul>
 </div>
 </template>
@@ -94,9 +80,7 @@ export default {
             mode: "create",
             editid: null,
             stojakready:false,
-            stojaki:[],
-            cruddata: {},
-            filterKey:''
+            cruddata: {}
         };
     },
     methods: {
@@ -104,7 +88,6 @@ export default {
             let self = this;
             //axios.get("/category").then(res => console.log(res));
             axios.get("/" + self.modelname.toLowerCase()).then(res => (self.dane = res.data));
-            axios.get('/stojak').then(res=>self.stojaki = res.data);
         },
         mydestroy(id) {
             let self = this;
@@ -152,47 +135,6 @@ export default {
             } else {
                 return [];
             }
-        },
-        filteredDane: function () {
-            let self = this;
-
-            let sortOrders = {
-                barcode: 1
-            };
-
-            var filterKey = this.filterKey;
-            var order = this.sortOrder;
-            var dane = this.dane;
-
-            let filtered = [];
-            if (this.sortKey) {
-                console.log('sortkey');
-                filtered = dane.slice().sort(function (a, b) {
-                    a = a[self.sortKey];
-                    b = b[self.sortKey];
-                    return (a === b ? 0 : a > b ? 1 : -1) * order;
-                });
-            }
-
-            if (filterKey.length > 0) {
-                console.log(filterKey);
-                filtered = dane.filter(function (row) {
-                    return Object.keys(row).some(function (key) {
-                        return (
-                            String(row[key])
-                            //.toLowerCase()
-                            .indexOf(filterKey) > -1
-                        );
-                    });
-                });
-            }
-
-            if(this.sortKey || this.filterKey){
-                return filtered
-            }else{
-                return dane
-            }
-
         }
     }
 };

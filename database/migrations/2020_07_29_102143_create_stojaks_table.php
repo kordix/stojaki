@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTodosTable extends Migration
+class CreateStojaksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateTodosTable extends Migration
      */
     public function up()
     {
-        Schema::create('todos', function (Blueprint $table) {
+        Schema::create('stojaks', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title')->nullable();$table->string('description')->nullable();$table->integer('category_id')->nullable();
+            $table->string('barcode')->nullable();
+            $table->string('lokalizacja')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateTodosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('todos');
+        Schema::dropIfExists('stojaks');
     }
 }

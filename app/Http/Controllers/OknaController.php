@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Okna;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OknaController extends Controller
 {
@@ -14,7 +15,9 @@ class OknaController extends Controller
      */
     public function index()
     {
-        return Okna::all();
+        //return Okna::all();
+
+        return DB::table('oknas')->leftJoin('stojaks', 'oknas.stojak_id', '=', 'stojaks.barcode')->select('oknas.*', 'stojaks.lokalizacja')->get();
     }
 
     /**

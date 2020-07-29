@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Todo;
+use App\Stojak;
 use Illuminate\Http\Request;
 
-class TodoController extends Controller
+class StojakController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class TodoController extends Controller
      */
     public function index()
     {
-        return Todo::all();
+        return Stojak::all();
     }
 
     /**
@@ -35,16 +35,16 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-        Todo::create($request->all());
-    }   
+        Stojak::create($request -> all());
+    }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Todo  $todo
+     * @param  \App\Stojak  $stojak
      * @return \Illuminate\Http\Response
      */
-    public function show(Todo $todo)
+    public function show(Stojak $stojak)
     {
         //
     }
@@ -52,10 +52,10 @@ class TodoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Todo  $todo
+     * @param  \App\Stojak  $stojakt
      * @return \Illuminate\Http\Response
      */
-    public function edit(Todo $todo)
+    public function edit(Stojak $stojak)
     {
         //
     }
@@ -64,22 +64,22 @@ class TodoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Todo  $todo
+     * @param  \App\Stojak  $stojak
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Todo $todo)
+    public function update(Request $request, Stojak $stojak)
     {
-        $todo->update($request->all());
+        Stojak::update($request -> all());
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Todo  $todo
+     * @param  \App\Stojak  $stojak
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Todo $todo)
+    public function destroy(Stojak $stojak)
     {
-        $todo->delete();
+        $stojak->delete();
     }
 }

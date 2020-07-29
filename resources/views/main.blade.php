@@ -4,14 +4,18 @@
 
 
 <div class="container">
-{{-- <select name="" id="" v-model="activetab">
-    <option value="main">main</option>
-    <option value="kategorie">kategorie</option>
+<select name="" id="" v-model="activetab">
+    <option value="main">Okna</option>
+    <option value="stojaki">Stojaki</option>
 
-</select> --}}
+</select>
  <div v-if="activetab=='main'">
     <read :key="'1'" :modelname="'Okna'"></read>
-    {{-- <edit :key="'2'" :modelname="'Todo'"></edit> --}}
+ </div>
+
+
+ <div v-if="activetab=='stojaki'">
+    <readstojak :key="'1'" :modelname="'Stojak'"></readstojak>
  </div>
 
     

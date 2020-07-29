@@ -15,7 +15,10 @@ class CreateOknasTable extends Migration
     {
         Schema::create('oknas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('barcode')->nullable();$table->string('order')->nullable();$table->string('user_id')->nullable();$table->string('stojak_id')->nullable();
+            $table->string('barcode')->nullable();
+            $table->string('order')->nullable();
+            $table->string('user_id')->nullable();
+            $table->string('stojak_id')->nullable();
             $table->timestamps();
         });
     }
