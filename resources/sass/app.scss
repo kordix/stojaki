@@ -1,10 +1,15 @@
+//table header color
 .theme--dark.v-data-table.v-data-table--fixed-header thead th{
     background: #005555!important;
 }
+//transparent table
 .theme--dark.v-data-table {
     background-color: transparent!important;
 }
-
+//transparent tabs
+.theme--light.v-tabs-items{
+    background-color: transparent!important;
+}
 
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');

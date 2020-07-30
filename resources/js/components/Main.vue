@@ -3,20 +3,34 @@
         <v-container fluid class="fill-height dark">
             <v-row class="fill-height">
                 <v-col class="fill-height">
-
                     <v-card class="gradient fill-height" dark max-width="1200px">
-                        <v-card-title>
-      Okna na Stojakach
-      <v-spacer></v-spacer>
-      <v-text-field
-        v-model="search"
-        append-icon="mdi-magnify"
-        label="Szukaj"
-        single-line
-        hide-details
-      ></v-text-field>
-    </v-card-title>
-                        <v-data-table fixed-header :search="search" class="overflow-y-auto" dark :headers="headers" :items="items" disable-pagination hide-default-footer height="200px"></v-data-table>
+                        <v-tabs background-color="transparent">
+                            <v-tab>Wyszukiwarka Okien</v-tab>
+                            <v-tab>Skanowanie Okien</v-tab>
+                            <v-tab-item background-color="transparent">
+                                <v-card-title> Okna na Stojakach <v-spacer></v-spacer>
+                                    <v-text-field  dark v-model="search" append-icon="mdi-magnify" label="Szukaj" single-line hide-details></v-text-field>
+                                </v-card-title>
+                                <v-data-table no-results-text="Brak pasujących wyników" fixed-header :search="search" class="overflow-y-auto" dark :headers="headers" :items="items" disable-pagination hide-default-footer height="200px"></v-data-table>
+                            </v-tab-item>
+                            <v-tab-item>
+                                <v-container fluid>
+                                    <v-row>
+                                        <v-col cols="5">
+                                            <span>Otwórz stojak</span>
+                                            <v-text-field @keyup.enter="addWindows" v-model="stand" dark rounded autocomplete="off" filled single-line dense></v-text-field>
+                                            <span>Dodaj okna do stojaka</span>
+                                            <v-text-field v-for="idx of indices" v-model="windows[idx]" :key="idx" ref="idx" dark rounded autocomplete="off" filled single-line dense @keyup.enter="addInput"></v-text-field>
+                                        </v-col>
+                                    </v-row>
+
+                                    <v-row>
+                                        <v-col><v-btn small dark>Zamknij Stojak</v-btn></v-col>
+                                    </v-row>
+
+                                </v-container>
+                            </v-tab-item>
+                        </v-tabs>
                     </v-card>
                 </v-col>
             </v-row>
@@ -43,7 +57,22 @@ export default {
                 {barcode:'7865', order:'ZAM-00-8768', post:'001', item:'#1', stand:'stand:43', site:'B1'},
                 {barcode:'67867876', order:'ZAM-00-876585', post:'001', item:'#1', stand:'stand:23', site:'A1'},
             ],
-            search:''
+            search:'',
+            stand:'',
+            windows: [''],
+            indices: [0]
+        }
+    },
+    methods:{
+        addInput(){
+            let val = this.indices[this.indices.length-1]
+            this.indices.push(val+1)
+            this.$nextTick(()=>{
+            this.$refs.idx[val+1].focus()
+            });
+        },
+        addWindows(){
+            this.$refs.idx[0].focus()
         }
     }
     
