@@ -15,10 +15,14 @@ class CreateWindowsTable extends Migration
     {
         Schema::create('windows', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('barcode')->nullable();
+            $table->string('barcode')->nullable()->unique();
             $table->string('order')->nullable();
+            $table->string('order_pos')->nullable();
+            $table->string('order_item')->nullable();
             $table->string('user_id')->nullable();
             $table->string('stand')->nullable();
+            $table->string('client')->nullable();
+            $table->string('client_code')->nullable();
             $table->string('remarks')->nullable();
             $table->timestamps();
         });

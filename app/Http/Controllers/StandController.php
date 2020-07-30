@@ -14,7 +14,7 @@ class StandController extends Controller
      */
     public function index()
     {
-        return Stojak::all();
+        return Stand::all();
     }
 
     /**
@@ -47,6 +47,10 @@ class StandController extends Controller
     public function show(Stand $stand)
     {
         //
+    }
+    public function findStand(){
+        $barcode = $_GET['barcode'];
+        return Stand::where('barcode', $barcode)->first();
     }
 
     /**

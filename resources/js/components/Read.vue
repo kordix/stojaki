@@ -102,9 +102,7 @@ export default {
     methods: {
         getData() {
             let self = this;
-            //axios.get("/category").then(res => console.log(res));
             axios.get("/" + self.modelname.toLowerCase()).then(res => (self.dane = res.data));
-            axios.get('/stojak').then(res=>self.stojaki = res.data);
         },
         mydestroy(id) {
             let self = this;

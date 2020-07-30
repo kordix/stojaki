@@ -17,6 +17,10 @@ class WindowController extends Controller
     {
         return DB::table('windows')->leftJoin('stands', 'windows.stand', '=', 'stands.barcode')->select('windows.*', 'stands.site')->get();
     }
+/*     public function standWindows(){
+        $stand = $_GET['stand'];
+        return Window::where('stand', $stand)->get();
+    } */
 
     /**
      * Show the form for creating a new resource.
