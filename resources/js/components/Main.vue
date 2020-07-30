@@ -17,15 +17,17 @@
                                 <v-container fluid>
                                     <v-row>
                                         <v-col cols="5">
+                                            <span>Lokalizacja Stojaka</span>
+                                            <v-select :items="sites" v-model="site" dark rounded autocomplete="off" filled single-line dense></v-select>
                                             <span>Otwórz stojak</span>
                                             <v-text-field @keyup.enter="addWindows" v-model="stand" dark rounded autocomplete="off" filled single-line dense></v-text-field>
                                             <span>Dodaj okna do stojaka</span>
                                             <v-text-field v-for="idx of indices" v-model="windows[idx]" :key="idx" ref="idx" dark rounded autocomplete="off" filled single-line dense @keyup.enter="addInput"></v-text-field>
-                                        </v-col>
-                                    </v-row>
-
-                                    <v-row>
                                         <v-col><v-btn small dark>Zamknij Stojak</v-btn></v-col>
+                                        </v-col>
+                                        <v-col>
+                                            <v-data-table fixed-header class="overflow-y-auto" dark :headers="standHeaders" :items="standItems" disable-pagination hide-default-footer height="400px"></v-data-table>
+                                        </v-col>
                                     </v-row>
 
                                 </v-container>
@@ -57,10 +59,28 @@ export default {
                 {barcode:'7865', order:'ZAM-00-8768', post:'001', item:'#1', stand:'stand:43', site:'B1'},
                 {barcode:'67867876', order:'ZAM-00-876585', post:'001', item:'#1', stand:'stand:23', site:'A1'},
             ],
+            standHeaders:[
+                {text:'window', value:'window'},
+                {text:'order', value:'order'},
+                {text:'post', value:'post'},
+                {text:'item', value:'item'},
+                {text:'stand', value:'stand'},
+                {text:'site', value:'site'},
+            ],
+            standItems:[
+                {window:'346567', order:'ZAM-00-20020', post:'001', item:'#1', stand:'stand:1234', site:'F1'},
+                {window:'43332', order:'ZAM-00-235554', post:'001', item:'#1', stand:'stand:653', site:'A3'},
+                {window:'34234234', order:'ZAM-00-31515', post:'001', item:'#1', stand:'stand:63', site:'H1'},
+                {window:'32423', order:'ZAM-00-645768', post:'001', item:'#1', stand:'stand:7327', site:'A6'},
+                {window:'7865', order:'ZAM-00-8768', post:'001', item:'#1', stand:'stand:43', site:'B1'},
+                {window:'67867876', order:'ZAM-00-876585', post:'001', item:'#1', stand:'stand:23', site:'A1'},
+            ],
             search:'',
             stand:'',
             windows: [''],
-            indices: [0]
+            indices: [0],
+            sites:['A1', 'A2', 'B1', 'B2', 'C1', 'C2'],
+            site: ''
         }
     },
     methods:{
