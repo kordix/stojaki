@@ -73,7 +73,7 @@ class StandController extends Controller
      */
     public function update(Request $request, Stand $stand)
     {
-        Stand::update($request -> all());
+        $stand->update($request->all());
     }
 
     /**

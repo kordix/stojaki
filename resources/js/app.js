@@ -34,7 +34,6 @@ Vue.component('readstojak', require('./components/Readstojak.vue').default);
  */
 import vuetify from './vuetify'
 import router from './router'
-import { EventBus } from '../js/event-bus';
 const app = new Vue({
     router,
     vuetify,
