@@ -121,6 +121,7 @@ export default {
         getClass(site){
             let taken = this.takenSites.includes(site)? true : false
             let current = this.site == site
+            if(site == 'T1'){taken = false}
             return current ? {current:true} : {taken: taken, vacant: !taken}
         },
         async addInput(){
@@ -179,7 +180,7 @@ export default {
             this.standList = res.data.map((el)=>{return el.barcode})
         },
         assignSite(site){
-            if(this.takenSites.includes(site)){
+            if(this.takenSites.includes(site)&& site != 'T1'){
                 alert('Ta lokalizacja jest zajęta. Wybierz inną.')
             } else {
                 this.site = site
